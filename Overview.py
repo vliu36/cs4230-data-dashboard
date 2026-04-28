@@ -3,16 +3,18 @@ import networkx as nx
 import pandas as pd
 
 from utils.load_data import load_network_data, giant_component_subgraph
-from utils.graph_display import build_graph
+from utils.figure_builder import build_graph
 
 st.set_page_config(
     page_title="Overview - Contagion in the Gallery",
     page_icon="✔️",
     layout="wide"
 )
+st.sidebar.header("Overview")
+st.sidebar.markdown("- [What does this graph represent?](#what-does-this-graph-represent)")
 
-# Loads data from the 8 datasets in graph and dataframe formats
-dates = ["05-03", "05-13", "05-23", "06-04", "06-14", "06-24", "07-05", "07-15"]
+# Loads network, subgraph from the 8 datasets in graph and dataframe formats
+dates = ["05-03-2009", "05-13-2009", "05-23-2009", "06-04-2009", "06-14-2009", "06-24-2009", "07-05-2009", "07-15-2009"]
 G_dict = {}
 node_df_dict = {}
 edge_df_dict = {}
@@ -39,13 +41,17 @@ contagion models to predict the spread of diseases or information through the ex
 """
 )
 
-st.markdown("#### What does this graph represent?")
+st.header(
+    body="What does this graph represent?",
+    anchor="what-does-this-graph-represent"
+)
 st.markdown(
 """
-- **Nodes:** visitors at the Science Gallery in Dublin (people)\n
-- **Edges:** people who spent time with each other within close proximity
-- The graph is undirected
-- The graph is weighted, with weights representing the number of times two nodes were in close, face-to-face proximity with one another
+- **Nodes:** visitors at the Science Gallery in Dublin (people).\n
+- **Edges:** people who spent time with each other within close proximity.
+- The graph is undirected.
+- The graph is weighted, with weights representing the number of times two nodes were in close, face-to-face proximity with one another.
+- There are 8 datasets in total, each representing a different day at the Science Gallery in Dublin.
 """
 )
 selected_date = st.selectbox(
@@ -56,3 +62,4 @@ selected_date = st.selectbox(
 
 fig_network = build_graph(node_df_dict[selected_date], edge_df_dict[selected_date])
 st.plotly_chart(fig_network, width="stretch", key="Overview Chart")
+st.dataframe(node_df_dict[selected_date][["node", "degree", "degree_centrality", "betweenness","closeness", "eigenvector", "community"]], width='stretch')
