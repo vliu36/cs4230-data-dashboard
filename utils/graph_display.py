@@ -30,7 +30,7 @@ def build_graph(plot_nodes: pd.DataFrame, plot_edges: pd.DataFrame):
         y=edge_y,
         mode="lines",
         hoverinfo="none",
-        line=dict(width=0.8, color="lightgray")
+        line=dict(width=0.5, color="gray")
     )
 
     node_trace = go.Scatter(
@@ -48,8 +48,8 @@ def build_graph(plot_nodes: pd.DataFrame, plot_edges: pd.DataFrame):
         marker=dict(
             size=10,
             color=plot_nodes["community"],
-            colorscale="Viridis",
-            line=dict(width=0.1, color="gray"),
+            colorscale="Blues",
+            line=dict(width=1, color="black"),
             showscale=True,
             colorbar=dict(title="Community")
         )
