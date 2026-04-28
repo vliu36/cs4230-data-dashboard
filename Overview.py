@@ -12,7 +12,7 @@ st.set_page_config(
 )
 
 # Loads data from the 8 datasets in graph and dataframe formats
-dates = ["07-15", "07-05", "06-24", "06-14", "06-04", "05-23", "05-13", "05-03"]
+dates = ["05-03", "05-13", "05-23", "06-04", "06-14", "06-24", "07-05", "07-15"]
 G_dict = {}
 node_df_dict = {}
 edge_df_dict = {}
