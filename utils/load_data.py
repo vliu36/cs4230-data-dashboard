@@ -35,3 +35,11 @@ def load_network_data(path):
 
     edge_df = pd.DataFrame(list(G.edges()), columns=["source", "target"])
     return G, node_df, edge_df
+
+def giant_component_subgraph(G):
+    """Return the subgraph of the largest connected component (undirected)."""
+    if G.number_of_nodes() == 0:
+        return G.copy()
+    components = list(nx.connected_components(G))
+    gcc_nodes = max(components, key=len)
+    return G.subgraph(gcc_nodes).copy()
