@@ -7,4 +7,11 @@ st.set_page_config(
 
 st.markdown("# Contagion Models")
 st.sidebar.header("Contagion Models")
-st.write("Contagion models go here")
+st.markdown(
+"""
+This section will include:
+- contagion model analysis using different seed nodes
+- visualization of spread given different seed nodes
+- aims to answer 2nd research question
+"""
+)

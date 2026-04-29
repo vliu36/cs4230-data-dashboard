@@ -7,4 +7,11 @@ st.set_page_config(
 
 st.markdown("# Interpretations and Limitations")
 st.sidebar.header("Interpretations and Limitations")
-st.write("Interpretations and Limitations models go here")
+st.markdown(
+"""
+This section will include:
+- synthesis of information in the previous sections to answer the third research question
+- summary of the answers to the three research questions
+- limitations of the study
+"""
+)
