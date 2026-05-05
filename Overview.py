@@ -63,3 +63,4 @@ selected_date = st.selectbox(
 fig_network = build_graph(node_df_dict[selected_date], edge_df_dict[selected_date])
 st.plotly_chart(fig_network, width="stretch", key="Overview Chart")
 st.dataframe(node_df_dict[selected_date][["node", "degree", "degree_centrality", "betweenness","closeness", "eigenvector", "community"]], width='stretch')
+

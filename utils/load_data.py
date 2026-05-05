@@ -43,3 +43,24 @@ def giant_component_subgraph(G):
     components = list(nx.connected_components(G))
     gcc_nodes = max(components, key=len)
     return G.subgraph(gcc_nodes).copy()
+
+def graph_stats(G):
+    """
+    Compute basic stats:
+    - n, m
+    - avg degree
+    - average clustering (nx.average_clustering)
+    - average shortest path length on giant component (if >= 2 nodes)
+    """
+    n = G.number_of_nodes()
+    m = G.number_of_edges()
+    avg_deg = (2*m / n) if n > 0 else float('nan')
+    C = nx.average_clustering(G) if n > 0 else float('nan')
+
+    GCC = giant_component_subgraph(G)
+    if GCC.number_of_nodes() >= 2 and nx.is_connected(GCC):
+        L = nx.average_shortest_path_length(GCC)
+    else:
+        L = float('nan')
+
+    return {"n": n, "m": m, "avg_deg": avg_deg, "C": C, "L_gcc": L, "gcc_size": GCC.number_of_nodes()}
