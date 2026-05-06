@@ -12,7 +12,7 @@ contagion models to predict the spread of diseases or information through the ex
 3. What can be changed to reduce the spread of activation?
 
 ## Dataset Source
-This dataset is obtained from [SocioPatterns's "Infectious" exhibition](https://sociopatterns.org/datasets.html#data-infectious-sociopatterns). Information on the dataset can be found in their paper, "What's in a crowd? Analysis of face-to-face behavioral networks". 
+This dataset is obtained from [SocioPatterns's "Infectious" exhibition](https://sociopatterns.org/datasets.html#data-infectious-sociopatterns). Information on the dataset can be found in the paper, ["What's in a crowd? Analysis of face-to-face behavioral networks"](https://www.sciencedirect.com/science/article/abs/pii/S0022519310006284#s0015). 
 
 ## How to Run
 1. Clone the repository to your local device
