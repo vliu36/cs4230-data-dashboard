@@ -2,7 +2,7 @@ import streamlit as st
 import networkx as nx
 import pandas as pd
 
-from utils.load_data import load_network_data, giant_component_subgraph
+from utils.load_data import load_network_data
 from utils.figure_builder import build_graph
 
 st.set_page_config(
@@ -11,19 +11,24 @@ st.set_page_config(
     layout="wide"
 )
 st.sidebar.header("Overview")
-st.sidebar.markdown("- [What does this graph represent?](#what-does-this-graph-represent)")
+st.sidebar.markdown("""
+                    - [About the Dataset](#about-the-dataset)
+                    - [What does this graph represent?](#what-does-this-graph-represent)
+                    """)
 
 # Loads network, subgraph from the 8 datasets in graph and dataframe formats
 dates = ["05-03-2009", "05-13-2009", "05-23-2009", "06-04-2009", "06-14-2009", "06-24-2009", "07-05-2009", "07-15-2009"]
 G_dict = {}
 node_df_dict = {}
 edge_df_dict = {}
+degree_df_dict = {}
 
 for date in dates:
-    G, node_df, edge_df = load_network_data(f"./datasets/{date}.gml")
+    G, node_df, edge_df, degrees = load_network_data(f"./datasets/{date}.gml")
     G_dict.update({date: G})
     node_df_dict.update({date: node_df})
     edge_df_dict.update({date: edge_df})
+    degree_df_dict.update({date: degrees})
 
 st.markdown("## Contagion in the Gallery: Examining Diffusion in Real-World Networks")
 st.markdown(
@@ -40,6 +45,17 @@ contagion models to predict the spread of diseases or information through the ex
 3. What can be changed to reduce the spread of activation?
 """
 )
+st.divider()
+
+st.header(
+    body="About the Dataset",
+    anchor="about-the-dataset"
+)
+st.markdown(
+    """
+    """
+)
+st.divider()
 
 st.header(
     body="What does this graph represent?",
@@ -62,5 +78,6 @@ selected_date = st.selectbox(
 
 fig_network = build_graph(node_df_dict[selected_date], edge_df_dict[selected_date])
 st.plotly_chart(fig_network, width="stretch", key="Overview Chart")
-st.dataframe(node_df_dict[selected_date][["node", "degree", "degree_centrality", "betweenness","closeness", "eigenvector", "community"]], width='stretch')
-
+st.caption("The network for the selected date.")
+st.dataframe(node_df_dict[selected_date][["node", "degree", "degree_centrality", "betweenness","closeness","community"]], width='stretch')
+st.caption("A table consisting of nodes and their degrees, centrality measures, and community for the selected date.")

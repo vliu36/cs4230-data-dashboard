@@ -47,11 +47,7 @@ def build_graph(plot_nodes: pd.DataFrame, plot_edges: pd.DataFrame):
         ),
         marker=dict(
             size=10,
-            color=plot_nodes["community"],
-            colorscale="Blues",
-            line=dict(width=1, color="black"),
-            showscale=True,
-            colorbar=dict(title="Community")
+            line=dict(width=0.5, color="black")
         )
     )
 
@@ -66,7 +62,7 @@ def build_graph(plot_nodes: pd.DataFrame, plot_edges: pd.DataFrame):
 
     return fig
 
-def build_figure_with_target(plot_nodes: pd.DataFrame, plot_edges: pd.DataFrame, metric: str):
+def build_graph_with_target(plot_nodes: pd.DataFrame, plot_edges: pd.DataFrame, metric: str):
     """Create a Plotly network figure from node and edge tables, with top nodes of the target metric in a different color."""
     edge_x = []
     edge_y = []
@@ -96,8 +92,23 @@ def build_figure_with_target(plot_nodes: pd.DataFrame, plot_edges: pd.DataFrame,
     
     if metric == "betweenness":
         scaleText = "Betweenness Centrality"
-    else:
+    elif metric == "degree":
         scaleText = "Degree"
+    else:
+        scaleText = "community"
+    
+    metric_values = plot_nodes[metric]
+    metric_min = metric_values.min()
+    metric_max = metric_values.max()
+
+    if metric == "community":
+        metric_min = 1
+        metric_max = 1
+
+    if metric_max == metric_min:
+        scaled_sizes = [10] * len(plot_nodes)
+    else:
+        scaled_sizes = 12 + 20 * (metric_values - metric_min) / (metric_max - metric_min)
 
     node_trace = go.Scatter(
         x=plot_nodes["x"],
@@ -112,10 +123,10 @@ def build_figure_with_target(plot_nodes: pd.DataFrame, plot_edges: pd.DataFrame,
             "Betweenness: %{customdata[3]:.3f}<br>"
         ),
         marker=dict(
-            size=10,
+            size=scaled_sizes,
             color=plot_nodes[metric],
-            colorscale="GnBu",
-            line=dict(width=1, color="black"),
+            colorscale="Jet",
+            line=dict(width=0.5, color="black"),
             showscale=True,
             colorbar=dict(title=scaleText)
         )
@@ -129,4 +140,9 @@ def build_figure_with_target(plot_nodes: pd.DataFrame, plot_edges: pd.DataFrame,
         margin=dict(l=10, r=10, t=50, b=10),
         height=650
     )
+    return fig
+
+def build_deg_dist(degree_df):
+    fig = px.histogram(degree_df)
+
     return fig

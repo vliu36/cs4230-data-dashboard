@@ -6,6 +6,7 @@ base = "dark"
 primaryColor = "#8bc9e8"
 backgroundColor = "#00051b"
 linkColor = "#ffffff"
+linkUnderline = false
 
 [theme.sidebar]
 backgroundColor = "#01092d"

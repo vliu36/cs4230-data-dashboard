@@ -34,7 +34,12 @@ def load_network_data(path):
     })
 
     edge_df = pd.DataFrame(list(G.edges()), columns=["source", "target"])
-    return G, node_df, edge_df
+
+    degrees = pd.DataFrame({
+        "degree": [d for _, d in G.degree()]
+    })
+    
+    return G, node_df, edge_df, degrees
 
 def giant_component_subgraph(G):
     """Return the subgraph of the largest connected component (undirected)."""
@@ -51,11 +56,13 @@ def graph_stats(G):
     - avg degree
     - average clustering (nx.average_clustering)
     - average shortest path length on giant component (if >= 2 nodes)
+    - number of components
     """
     n = G.number_of_nodes()
     m = G.number_of_edges()
     avg_deg = (2*m / n) if n > 0 else float('nan')
     C = nx.average_clustering(G) if n > 0 else float('nan')
+    cc = nx.number_connected_components(G)
 
     GCC = giant_component_subgraph(G)
     if GCC.number_of_nodes() >= 2 and nx.is_connected(GCC):
@@ -63,4 +70,4 @@ def graph_stats(G):
     else:
         L = float('nan')
 
-    return {"n": n, "m": m, "avg_deg": avg_deg, "C": C, "L_gcc": L, "gcc_size": GCC.number_of_nodes()}
+    return {"n": n, "m": m, "avg_deg": avg_deg, "C": C, "L_gcc": L, "gcc_size": GCC.number_of_nodes(), "cc": cc}
