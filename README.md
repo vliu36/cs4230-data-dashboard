@@ -11,10 +11,10 @@ contagion models to predict the spread of diseases or information through the ex
 2. Are there nodes that allow the activation of more people or communities?
 3. What can be changed to reduce the spread of activation?
 
-## Dataset Source
-This dataset is obtained from [SocioPatterns's "Infectious" exhibition](https://sociopatterns.org/datasets.html#data-infectious-sociopatterns). Information on the dataset can be found in the paper, ["What's in a crowd? Analysis of face-to-face behavioral networks"](https://www.sciencedirect.com/science/article/abs/pii/S0022519310006284#s0015). 
-
 ## How to Run
 1. Clone the repository to your local device
 2. In a Python environment, run ``pip install streamlit plotly pandas networkx`` or ``pip install -r requirements.txt``
-3. In the root directory, run ``streamlit run Overview.py``
+3. In the project's root directory, run ``streamlit run Overview.py``
+
+## Dataset Source
+This dataset is obtained from [SocioPatterns's "Infectious" exhibition](https://sociopatterns.org/datasets.html#data-infectious-sociopatterns). Information on the dataset can be found in the paper, ["What's in a crowd? Analysis of face-to-face behavioral networks"](https://www.sciencedirect.com/science/article/abs/pii/S0022519310006284#s0015). 
