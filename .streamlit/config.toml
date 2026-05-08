@@ -4,9 +4,9 @@ showErrorDetails = "full"
 [theme]
 base = "dark"
 primaryColor = "#8bc9e8"
-backgroundColor = "#00051b"
+backgroundColor = "#171a2a"
 linkColor = "#ffffff"
 linkUnderline = false
 
 [theme.sidebar]
-backgroundColor = "#01092d"
+backgroundColor = "#15171c"

@@ -2,7 +2,6 @@ import streamlit as st
 import networkx as nx
 
 @st.cache_data
-
 def display_basic_metrics(stats):
     st.header(body="Graph Stats", anchor="graph-stats")
     

@@ -39,21 +39,25 @@ with tab1:
     display_basic_metrics(stats)
     fig_deg_dist = build_deg_dist(degree_df_dict[date])
     st.plotly_chart(fig_deg_dist, width="stretch")
+    st.caption("Degree distribution of the selected network.")
     st.divider()
 
     st.header(body="Degree Centrality", anchor="degree-centrality")
     fig_deg_network = build_graph_with_target(node_df_dict[date], edge_df_dict[date], "degree")
     st.plotly_chart(fig_deg_network, width="stretch")
+    st.caption("Network visualization showing the highest degree centrality nodes.")
     st.divider()
 
     st.header(body="Betweenness Centrality", anchor="betweenness-centrality")
     fig_btwn_network = build_graph_with_target(node_df_dict[date], edge_df_dict[date], "betweenness")
     st.plotly_chart(fig_btwn_network, width="stretch")
+    st.caption("Network visualization showing the highest betweenness centrality nodes.")
     st.divider()
 
     st.header(body="Communities", anchor="communities")
     fig_btwn_network = build_graph_with_target(node_df_dict[date], edge_df_dict[date], "community")
     st.plotly_chart(fig_btwn_network, width="stretch")
+    st.caption("Network visualization showing its communities, according to the greedy modularity algorithm")
 
 
 with tab2:
@@ -63,21 +67,25 @@ with tab2:
     display_basic_metrics(stats)
     fig_deg_dist = build_deg_dist(degree_df_dict[date])
     st.plotly_chart(fig_deg_dist, width="stretch")
+    st.caption("Degree distribution of the selected network.")
     st.divider()
 
     st.header(body="Degree Centrality", anchor="degree-centrality")
     fig_deg_network = build_graph_with_target(node_df_dict[date], edge_df_dict[date], "degree")
     st.plotly_chart(fig_deg_network, width="stretch")
+    st.caption("Network visualization showing the highest degree centrality nodes.")
     st.divider()
 
     st.header(body="Betweenness Centrality", anchor="betweenness-centrality")
     fig_btwn_network = build_graph_with_target(node_df_dict[date], edge_df_dict[date], "betweenness")
     st.plotly_chart(fig_btwn_network, width="stretch")
+    st.caption("Network visualization showing the highest betweenness centrality nodes.")
     st.divider()
 
     st.header(body="Communities", anchor="communities")
     fig_btwn_network = build_graph_with_target(node_df_dict[date], edge_df_dict[date], "community")
     st.plotly_chart(fig_btwn_network, width="stretch")
+    st.caption("Network visualization showing its communities, according to the greedy modularity algorithm")
 
 with tab3:
     date = dates[2]
@@ -86,21 +94,25 @@ with tab3:
     display_basic_metrics(stats)
     fig_deg_dist = build_deg_dist(degree_df_dict[date])
     st.plotly_chart(fig_deg_dist, width="stretch")
+    st.caption("Degree distribution of the selected network.")
     st.divider()
 
     st.header(body="Degree Centrality", anchor="degree-centrality")
     fig_deg_network = build_graph_with_target(node_df_dict[date], edge_df_dict[date], "degree")
     st.plotly_chart(fig_deg_network, width="stretch")
+    st.caption("Network visualization showing the highest degree centrality nodes.")
     st.divider()
 
     st.header(body="Betweenness Centrality", anchor="betweenness-centrality")
     fig_btwn_network = build_graph_with_target(node_df_dict[date], edge_df_dict[date], "betweenness")
     st.plotly_chart(fig_btwn_network, width="stretch")
+    st.caption("Network visualization showing the highest betweenness centrality nodes.")
     st.divider()
 
     st.header(body="Communities", anchor="communities")
     fig_btwn_network = build_graph_with_target(node_df_dict[date], edge_df_dict[date], "community")
     st.plotly_chart(fig_btwn_network, width="stretch")
+    st.caption("Network visualization showing its communities, according to the greedy modularity algorithm")
     
 with tab4:
     date = dates[3]
@@ -109,21 +121,25 @@ with tab4:
     display_basic_metrics(stats)
     fig_deg_dist = build_deg_dist(degree_df_dict[date])
     st.plotly_chart(fig_deg_dist, width="stretch")
+    st.caption("Degree distribution of the selected network.")
     st.divider()
 
     st.header(body="Degree Centrality", anchor="degree-centrality")
     fig_deg_network = build_graph_with_target(node_df_dict[date], edge_df_dict[date], "degree")
     st.plotly_chart(fig_deg_network, width="stretch")
+    st.caption("Network visualization showing the highest degree centrality nodes.")
     st.divider()
 
     st.header(body="Betweenness Centrality", anchor="betweenness-centrality")
     fig_btwn_network = build_graph_with_target(node_df_dict[date], edge_df_dict[date], "betweenness")
     st.plotly_chart(fig_btwn_network, width="stretch")
+    st.caption("Network visualization showing the highest betweenness centrality nodes.")
     st.divider()
 
     st.header(body="Communities", anchor="communities")
     fig_btwn_network = build_graph_with_target(node_df_dict[date], edge_df_dict[date], "community")
     st.plotly_chart(fig_btwn_network, width="stretch")
+    st.caption("Network visualization showing its communities, according to the greedy modularity algorithm")
     
 with tab5:
     date = dates[4]
@@ -132,21 +148,25 @@ with tab5:
     display_basic_metrics(stats)
     fig_deg_dist = build_deg_dist(degree_df_dict[date])
     st.plotly_chart(fig_deg_dist, width="stretch")
+    st.caption("Degree distribution of the selected network.")
     st.divider()
 
     st.header(body="Degree Centrality", anchor="degree-centrality")
     fig_deg_network = build_graph_with_target(node_df_dict[date], edge_df_dict[date], "degree")
     st.plotly_chart(fig_deg_network, width="stretch")
+    st.caption("Network visualization showing the highest degree centrality nodes.")
     st.divider()
 
     st.header(body="Betweenness Centrality", anchor="betweenness-centrality")
     fig_btwn_network = build_graph_with_target(node_df_dict[date], edge_df_dict[date], "betweenness")
     st.plotly_chart(fig_btwn_network, width="stretch")
+    st.caption("Network visualization showing the highest betweenness centrality nodes.")
     st.divider()
 
     st.header(body="Communities", anchor="communities")
     fig_btwn_network = build_graph_with_target(node_df_dict[date], edge_df_dict[date], "community")
     st.plotly_chart(fig_btwn_network, width="stretch")
+    st.caption("Network visualization showing its communities, according to the greedy modularity algorithm")
     
 with tab6:
     date = dates[5]
@@ -155,21 +175,25 @@ with tab6:
     display_basic_metrics(stats)
     fig_deg_dist = build_deg_dist(degree_df_dict[date])
     st.plotly_chart(fig_deg_dist, width="stretch")
+    st.caption("Degree distribution of the selected network.")
     st.divider()
 
     st.header(body="Degree Centrality", anchor="degree-centrality")
     fig_deg_network = build_graph_with_target(node_df_dict[date], edge_df_dict[date], "degree")
     st.plotly_chart(fig_deg_network, width="stretch")
+    st.caption("Network visualization showing the highest degree centrality nodes.")
     st.divider()
 
     st.header(body="Betweenness Centrality", anchor="betweenness-centrality")
     fig_btwn_network = build_graph_with_target(node_df_dict[date], edge_df_dict[date], "betweenness")
     st.plotly_chart(fig_btwn_network, width="stretch")
+    st.caption("Network visualization showing the highest betweenness centrality nodes.")
     st.divider()
 
     st.header(body="Communities", anchor="communities")
     fig_btwn_network = build_graph_with_target(node_df_dict[date], edge_df_dict[date], "community")
     st.plotly_chart(fig_btwn_network, width="stretch")
+    st.caption("Network visualization showing its communities, according to the greedy modularity algorithm")
 
 with tab7:
     date = dates[6]
@@ -178,21 +202,25 @@ with tab7:
     display_basic_metrics(stats)
     fig_deg_dist = build_deg_dist(degree_df_dict[date])
     st.plotly_chart(fig_deg_dist, width="stretch")
+    st.caption("Degree distribution of the selected network.")
     st.divider()
 
     st.header(body="Degree Centrality", anchor="degree-centrality")
     fig_deg_network = build_graph_with_target(node_df_dict[date], edge_df_dict[date], "degree")
     st.plotly_chart(fig_deg_network, width="stretch")
+    st.caption("Network visualization showing the highest degree centrality nodes.")
     st.divider()
 
     st.header(body="Betweenness Centrality", anchor="betweenness-centrality")
     fig_btwn_network = build_graph_with_target(node_df_dict[date], edge_df_dict[date], "betweenness")
     st.plotly_chart(fig_btwn_network, width="stretch")
+    st.caption("Network visualization showing the highest betweenness centrality nodes.")
     st.divider()
 
     st.header(body="Communities", anchor="communities")
     fig_btwn_network = build_graph_with_target(node_df_dict[date], edge_df_dict[date], "community")
     st.plotly_chart(fig_btwn_network, width="stretch")
+    st.caption("Network visualization showing its communities, according to the greedy modularity algorithm")
 
 with tab8:
     date = dates[7]
@@ -201,21 +229,25 @@ with tab8:
     display_basic_metrics(stats)
     fig_deg_dist = build_deg_dist(degree_df_dict[date])
     st.plotly_chart(fig_deg_dist, width="stretch")
+    st.caption("Degree distribution of the selected network.")
     st.divider()
 
     st.header(body="Degree Centrality", anchor="degree-centrality")
     fig_deg_network = build_graph_with_target(node_df_dict[date], edge_df_dict[date], "degree")
     st.plotly_chart(fig_deg_network, width="stretch")
+    st.caption("Network visualization showing the highest degree centrality nodes.")
     st.divider()
 
     st.header(body="Betweenness Centrality", anchor="betweenness-centrality")
     fig_btwn_network = build_graph_with_target(node_df_dict[date], edge_df_dict[date], "betweenness")
     st.plotly_chart(fig_btwn_network, width="stretch")
+    st.caption("Network visualization showing the highest betweenness centrality nodes.")
     st.divider()
 
     st.header(body="Communities", anchor="communities")
     fig_btwn_network = build_graph_with_target(node_df_dict[date], edge_df_dict[date], "community")
     st.plotly_chart(fig_btwn_network, width="stretch")
+    st.caption("Network visualization showing its communities, according to the greedy modularity algorithm")
     
 # st.markdown(
 # """

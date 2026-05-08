@@ -4,7 +4,6 @@ import pandas as pd
 import streamlit as st
 
 @st.cache_data
-
 def build_graph(plot_nodes: pd.DataFrame, plot_edges: pd.DataFrame):
     """Create a Plotly network figure from node and edge tables."""
     edge_x = []
@@ -62,6 +61,7 @@ def build_graph(plot_nodes: pd.DataFrame, plot_edges: pd.DataFrame):
 
     return fig
 
+@st.cache_data
 def build_graph_with_target(plot_nodes: pd.DataFrame, plot_edges: pd.DataFrame, metric: str):
     """Create a Plotly network figure from node and edge tables, with top nodes of the target metric in a different color."""
     edge_x = []
@@ -142,6 +142,7 @@ def build_graph_with_target(plot_nodes: pd.DataFrame, plot_edges: pd.DataFrame, 
     )
     return fig
 
+@st.cache_data
 def build_deg_dist(degree_df):
     fig = px.histogram(degree_df)
 
