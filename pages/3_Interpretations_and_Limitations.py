@@ -6,11 +6,23 @@ st.set_page_config(
 )
 
 st.markdown("# Interpretations and Limitations")
-st.sidebar.header("Interpretations and Limitations")
-st.markdown(
-"""
-This section will include:
-- synthesis of information in the previous sections to answer the research questions
-- limitations of the study
-"""
-)
+st.sidebar.markdown(
+    """
+    ## Interpretations and Limitations
+    - [Interpretations](#interpretations)
+    - [Limitations](#limitations)
+    """)
+
+st.header("Interpretations", anchor="interpretations")
+st.divider()
+
+st.header("Limitations", anchor="limitations")
+
+
+# st.markdown(
+# """
+# This section will include:
+# - synthesis of information in the previous sections to answer the research questions
+# - limitations of the study
+# """
+# )

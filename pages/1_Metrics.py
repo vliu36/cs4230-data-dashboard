@@ -12,8 +12,8 @@ st.set_page_config(
 )
 
 st.markdown("# Metrics")
-st.sidebar.header("Metrics")
 st.sidebar.markdown("""
+                    ## Metrics
                     - [Graph Stats](#graph-stats)
                     - [Degree Centrality](#degree-centrality)
                     - [Betweenness Centrality](#betweenness-centrality)

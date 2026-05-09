@@ -9,6 +9,7 @@ st.set_page_config(
 
 st.markdown("# Contagion Models")
 st.sidebar.markdown("""
+                    ## Contagion Models
                     - [Independent Cascade Model](#independent-cascade-model)
                     - [Linear Threshold Model](#linear-threshold-model)
                     """)
@@ -29,9 +30,23 @@ selected_date = st.selectbox(
 st.divider()
 
 st.header(body="Independent Cascade Model", anchor="independent-cascade-model")
+selected_target_icm = st.selectbox(
+    "Select seed node preference",
+    ["highest betweenness", "highest degree", "highest degree prioritizing communities"],
+    key="selected_target_icm"
+)
+st.text("TODO: Add network visualization here")
+n_seed_icm = st.slider("Number of seed nodes", 1, 20, 5, key="slider_n_icm")
 st.divider()
 
 st.header(body="Linear Threshold Model", anchor="linear-threshold-model")
+selected_target_ltm = st.selectbox(
+    "Select seed node preference",
+    ["highest betweenness", "highest degree", "highest degree prioritizing communities"],
+    key="selected_target_ltm"
+)
+st.text("TODO: Add network visualization here")
+n_seed_ltm = st.slider("Number of seed nodes", 1, 20, 5, key="slider_n_ltm")
 
 # st.markdown(
 # """
