@@ -1,6 +1,7 @@
 import networkx as nx
 import random
 import streamlit as st
+import random
 
 
 def get_greatest_weight(G):
@@ -75,7 +76,9 @@ def get_highest_betweenness_nodes(G, num_of_seeds=20):
         btwn_cent_list.append(btwn_cent[i])
     
     return [node for node, degree in btwn_cent_list]
+
 def get_random_seed_nodes(G, num_of_seeds=20):
+    random.seed(7)
     random_seed_node_list = []
 
     for i in range(num_of_seeds):
@@ -88,8 +91,9 @@ def get_random_seed_nodes(G, num_of_seeds=20):
     return random_seed_node_list
 
 def get_independent_cascade_dict(G, seed_node_type, num_of_iterations):
-
+    random.seed(7)
     activation_frequency_dict = dict()
+    activation_spread_list = []
 
     if seed_node_type == "degree":
         seed_nodes = get_highest_degree_nodes(G)
@@ -102,5 +106,8 @@ def get_independent_cascade_dict(G, seed_node_type, num_of_iterations):
         cascade_network = independent_cascade(G, seed_nodes)
         for node in cascade_network.nodes():
             activation_frequency_dict[node] = activation_frequency_dict.get(node, 0) + 1
+        activation_spread_list.append(len(cascade_network))
+    
+    average = sum(activation_spread_list) / len(activation_spread_list)
 
-    return activation_frequency_dict
+    return activation_frequency_dict, activation_spread_list, average

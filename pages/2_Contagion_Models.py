@@ -1,8 +1,6 @@
 import streamlit as st
-from utils.figure_builder import build_graph_with_target, build_graph
-from Overview import G_dict, node_df_dict, edge_df_dict, degree_df_dict
-
-dates = ["05-03-2009", "05-13-2009", "05-23-2009", "06-04-2009", "06-14-2009", "06-24-2009", "07-05-2009", "07-15-2009"]
+from utils.figure_builder import build_graph_with_target, build_deg_dist
+from Overview import G_dict, node_df_dict, edge_df_dict, dates, icm_degree_spread_info_dict, icm_betweenness_spread_info_dict, icm_random_spread_info_dict
 
 st.set_page_config(
     page_title="Contagion Models - Contagion in the Gallery",
@@ -39,15 +37,23 @@ selected_target_icm = st.selectbox(
 )
 
 seed_node_type = "icm_betweenness_frequency"
+activation_distribution = icm_betweenness_spread_info_dict[selected_date][0]
 if selected_target_icm == "highest betweennness":
     seed_node_type = "icm_betweenness_frequency"
+    activation_distribution = icm_betweenness_spread_info_dict[selected_date][0]
 elif selected_target_icm == "highest degree":
     seed_node_type = "icm_degree_frequency"
+    activation_distribution = icm_degree_spread_info_dict[selected_date][0]
 elif selected_target_icm == "random":
     seed_node_type = "icm_random_frequency"
+    activation_distribution = icm_random_spread_info_dict[selected_date][0]
+
 
 fig_btwn_network = build_graph_with_target(node_df_dict[selected_date], edge_df_dict[selected_date], seed_node_type)
+fig_deg_dist = build_deg_dist(activation_distribution)
 st.plotly_chart(fig_btwn_network, width="stretch")
+st.plotly_chart(fig_deg_dist, width="stretch")
+
 n_seed_icm = st.slider("Number of seed nodes", 1, 20, 5, key="slider_n_icm")
 st.divider()
 
@@ -57,7 +63,6 @@ selected_target_ltm = st.selectbox(
     ["highest betweenness", "highest degree", "highest degree prioritizing communities"],
     key="selected_target_ltm"
 )
-st.text("TODO: Add network visualization here")
 n_seed_ltm = st.slider("Number of seed nodes", 1, 20, 5, key="slider_n_ltm")
 
 # st.markdown(

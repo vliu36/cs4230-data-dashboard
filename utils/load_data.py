@@ -34,9 +34,9 @@ def load_network_data(path):
         "closeness": [closeness[n] for n in G.nodes()],
         "eigenvector": [eigenvector[n] for n in G.nodes()],
         "community": [community_map[n] for n in G.nodes()],
-        "icm_degree_frequency": [float(icm_degree_frequency[n]) if n in icm_degree_frequency.keys() else 0 for n in G.nodes()],
-        "icm_betweenness_frequency": [float(icm_betweenness_frequency[n]) if n in icm_betweenness_frequency.keys() else 0 for n in G.nodes()],
-        "icm_random_frequency": [float(icm_random_frequency[n]) if n in icm_random_frequency.keys() else 0 for n in G.nodes()],
+        "icm_degree_frequency": [icm_degree_frequency[0][n] if n in icm_degree_frequency[0].keys() else 0 for n in G.nodes()],
+        "icm_betweenness_frequency": [icm_betweenness_frequency[0][n] if n in icm_betweenness_frequency[0].keys() else 0 for n in G.nodes()],
+        "icm_random_frequency": [icm_random_frequency[0][n] if n in icm_random_frequency[0].keys() else 0 for n in G.nodes()],
         "x": [positions[n][0] for n in G.nodes()],
         "y": [positions[n][1] for n in G.nodes()]
     })
@@ -46,8 +46,13 @@ def load_network_data(path):
     degrees = pd.DataFrame({
         "degree": [d for _, d in G.degree()]
     })
+
+    icm_degree_spread_info = (icm_degree_frequency[1], icm_degree_frequency[2])
+    icm_betweenness_spread_info = (icm_betweenness_frequency[1], icm_betweenness_frequency[2])
+    icm_random_spread_info = (icm_random_frequency[1], icm_random_frequency[2])
+
     
-    return G, node_df, edge_df, degrees
+    return G, node_df, edge_df, degrees, icm_degree_spread_info, icm_betweenness_spread_info, icm_random_spread_info
 
 def giant_component_subgraph(G):
     """Return the subgraph of the largest connected component (undirected)."""
