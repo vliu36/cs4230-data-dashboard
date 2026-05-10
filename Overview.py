@@ -24,17 +24,19 @@ edge_df_dict = {}
 degree_df_dict = {}
 icm_degree_spread_info_dict = {}
 icm_betweenness_spread_info_dict = {}
+icm_degree_spread_out_spread_info_dict = {}
 icm_random_spread_info_dict = {}
 
 for date in dates:
-    G, node_df, edge_df, degrees, icm_degree_spread_info, icm_betweenness_spread_info, icm_random_spread_info = load_network_data(f"./datasets/{date}.gml")
+    G, node_df, edge_df, degrees, icm_degree_spread_info, icm_betweenness_spread_info, icm_degree_spread_out_spread_info, icm_random_spread_info = load_network_data(f"./datasets/{date}.gml")
     G_dict.update({date: G})
     node_df_dict.update({date: node_df})
     edge_df_dict.update({date: edge_df})
     degree_df_dict.update({date: degrees})
     icm_degree_spread_info_dict.update({date: icm_degree_spread_info})
     icm_betweenness_spread_info_dict.update({date: icm_betweenness_spread_info})
-    icm_random_spread_info_dict.update({date: icm_random_spread_info_dict})
+    icm_degree_spread_out_spread_info_dict.update({date: icm_degree_spread_out_spread_info})
+    icm_random_spread_info_dict.update({date: icm_random_spread_info})
 
 st.markdown("## Contagion in the Gallery: Examining Diffusion in Real-World Networks")
 st.markdown(

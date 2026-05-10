@@ -1,6 +1,6 @@
 import streamlit as st
 from utils.figure_builder import build_graph_with_target, build_deg_dist
-from Overview import G_dict, node_df_dict, edge_df_dict, dates, icm_degree_spread_info_dict, icm_betweenness_spread_info_dict, icm_random_spread_info_dict
+from Overview import G_dict, node_df_dict, edge_df_dict, dates, icm_degree_spread_info_dict, icm_betweenness_spread_info_dict, icm_degree_spread_out_spread_info_dict, icm_random_spread_info_dict
 
 st.set_page_config(
     page_title="Contagion Models - Contagion in the Gallery",
@@ -22,6 +22,7 @@ st.markdown(
     using seeds made up of high degree centrality nodes, high betweenness centrality nodes, and high degree centrality nodes within separate communities.
     """
 )
+
 selected_date = st.selectbox(
         "Select a date",
         dates,
@@ -30,6 +31,11 @@ selected_date = st.selectbox(
 st.divider()
 
 st.header(body="Independent Cascade Model", anchor="independent-cascade-model")
+col1, col2, col3, col4 = st.columns(4)
+col1.metric("Degree Average", icm_degree_spread_info_dict[selected_date][1], border=True)
+col2.metric("Betweenness Average", icm_betweenness_spread_info_dict[selected_date][1], border=True)
+col3.metric("Degree Spread Out Average", icm_degree_spread_out_spread_info_dict[selected_date][1], border=True)
+col4.metric("Random Average", icm_random_spread_info_dict[selected_date][1], border=True)
 selected_target_icm = st.selectbox(
     "Select seed node preference",
     ["highest betweenness", "highest degree", "highest degree prioritizing communities", "random"],
@@ -37,20 +43,22 @@ selected_target_icm = st.selectbox(
 )
 
 seed_node_type = "icm_betweenness_frequency"
-activation_distribution = icm_betweenness_spread_info_dict[selected_date][0]
+activation_stats = icm_betweenness_spread_info_dict[selected_date]
 if selected_target_icm == "highest betweennness":
     seed_node_type = "icm_betweenness_frequency"
-    activation_distribution = icm_betweenness_spread_info_dict[selected_date][0]
+    activation_stats = icm_betweenness_spread_info_dict[selected_date]
 elif selected_target_icm == "highest degree":
     seed_node_type = "icm_degree_frequency"
-    activation_distribution = icm_degree_spread_info_dict[selected_date][0]
+    activation_stats = icm_degree_spread_info_dict[selected_date]
+elif selected_target_icm == "highest degree prioritizing communities":
+    seed_node_type = "icm_degree_spread_out_frequency"
+    activation_stats = icm_degree_spread_out_spread_info_dict[selected_date]
 elif selected_target_icm == "random":
     seed_node_type = "icm_random_frequency"
-    activation_distribution = icm_random_spread_info_dict[selected_date][0]
-
+    activation_stats = icm_random_spread_info_dict[selected_date]
 
 fig_btwn_network = build_graph_with_target(node_df_dict[selected_date], edge_df_dict[selected_date], seed_node_type)
-fig_deg_dist = build_deg_dist(activation_distribution)
+fig_deg_dist = build_deg_dist(activation_stats[0])
 st.plotly_chart(fig_btwn_network, width="stretch")
 st.plotly_chart(fig_deg_dist, width="stretch")
 

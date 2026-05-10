@@ -1,7 +1,7 @@
 import networkx as nx
-import random
 import streamlit as st
 import random
+from networkx.algorithms.community import greedy_modularity_communities
 
 
 def get_greatest_weight(G):
@@ -55,7 +55,7 @@ def independent_cascade(G, seed_nodes):
   return activation_network
 
 
-def get_highest_degree_nodes(G, num_of_seeds=20):
+def get_highest_degree_nodes(G, num_of_seeds=50):
     highest_degree_list = []
 
     # For each network, stores the top 5 highest degree nodes into the dictionary
@@ -66,7 +66,7 @@ def get_highest_degree_nodes(G, num_of_seeds=20):
     
     return [node for node, degree in highest_degree_list]
 
-def get_highest_betweenness_nodes(G, num_of_seeds=20):
+def get_highest_betweenness_nodes(G, num_of_seeds=50):
     btwn_cent_list = []
 
     # For each network, stores the top 5 highest betweenness nodes into the dictionary
@@ -77,7 +77,41 @@ def get_highest_betweenness_nodes(G, num_of_seeds=20):
     
     return [node for node, degree in btwn_cent_list]
 
-def get_random_seed_nodes(G, num_of_seeds=20):
+def get_spread_out_highest_degree(G, num_of_seeds=50):  
+    communities = greedy_modularity_communities(G)
+    communities_copy = []
+
+    for community in communities:
+        communities_copy.append(list(community))
+
+    num_of_communities = len(communities_copy)
+    community_index = 0
+    highest_degree_spread_out = []
+    degree_centrality = nx.degree_centrality(G)
+
+
+    for i in range(num_of_seeds):
+        if community_index >= num_of_communities:
+            community_index = 0
+
+        while len(communities_copy[community_index]) == 0:
+            community_index += 1
+            if community_index >= num_of_communities:
+                community_index = 0
+
+
+        highest_degree_found = communities_copy[community_index][0]
+        for node in communities_copy[community_index]:
+            if degree_centrality[highest_degree_found] < degree_centrality[node]:
+                highest_degree_found = node
+
+        highest_degree_spread_out.append(highest_degree_found)
+        communities_copy[community_index].remove(highest_degree_found)
+        community_index += 1
+
+    return highest_degree_spread_out
+
+def get_random_seed_nodes(G, num_of_seeds=50):
     random.seed(7)
     random_seed_node_list = []
 
@@ -99,6 +133,8 @@ def get_independent_cascade_dict(G, seed_node_type, num_of_iterations):
         seed_nodes = get_highest_degree_nodes(G)
     elif seed_node_type == "betweenness":
         seed_nodes = get_highest_betweenness_nodes(G)
+    elif seed_node_type == "degree spread":
+        seed_nodes = get_spread_out_highest_degree(G)
     else:
         seed_nodes = get_random_seed_nodes(G)
 
