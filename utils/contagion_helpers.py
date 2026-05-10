@@ -54,31 +54,31 @@ def independent_cascade(G, seed_nodes):
   return activation_network
 
 
-def get_highest_degree_nodes(G):
+def get_highest_degree_nodes(G, num_of_seeds=20):
     highest_degree_list = []
 
     # For each network, stores the top 5 highest degree nodes into the dictionary
     degrees = [(degree[0], degree[1] / (len(list(G.nodes())) - 1)) for degree in G.degree()]
     degrees = sorted(degrees, key=lambda x: x[1], reverse=True)
-    for i in range(5):
+    for i in range(num_of_seeds):
         highest_degree_list.append(degrees[i])
     
     return [node for node, degree in highest_degree_list]
 
-def get_highest_betweenness_nodes(G):
+def get_highest_betweenness_nodes(G, num_of_seeds=20):
     btwn_cent_list = []
 
     # For each network, stores the top 5 highest betweenness nodes into the dictionary
     btwn_cent = nx.betweenness_centrality(G, normalized=True).items()
     btwn_cent = sorted(btwn_cent, key=lambda x: x[1], reverse=True)
-    for i in range(5):
+    for i in range(num_of_seeds):
         btwn_cent_list.append(btwn_cent[i])
     
     return [node for node, degree in btwn_cent_list]
-def get_random_seed_nodes(G):
+def get_random_seed_nodes(G, num_of_seeds=20):
     random_seed_node_list = []
 
-    for i in range(5):
+    for i in range(num_of_seeds):
         network_size = len(G.nodes())
         random_number = random.randrange(0, network_size)
         while (random_number in random_seed_node_list):

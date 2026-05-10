@@ -37,14 +37,16 @@ selected_target_icm = st.selectbox(
     ["highest betweenness", "highest degree", "highest degree prioritizing communities", "random"],
     key="selected_target_icm"
 )
+
+seed_node_type = "icm_betweenness_frequency"
 if selected_target_icm == "highest betweennness":
     seed_node_type = "icm_betweenness_frequency"
 elif selected_target_icm == "highest degree":
     seed_node_type = "icm_degree_frequency"
-else:
-    seed_node_type = "icm_degree_frequency"
+elif selected_target_icm == "random":
+    seed_node_type = "icm_random_frequency"
 
-fig_btwn_network = build_graph_with_target(node_df_dict[selected_date], edge_df_dict[selected_date], "icm_degree_frequency")
+fig_btwn_network = build_graph_with_target(node_df_dict[selected_date], edge_df_dict[selected_date], seed_node_type)
 st.plotly_chart(fig_btwn_network, width="stretch")
 n_seed_icm = st.slider("Number of seed nodes", 1, 20, 5, key="slider_n_icm")
 st.divider()
