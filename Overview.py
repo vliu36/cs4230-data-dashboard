@@ -1,9 +1,12 @@
 import streamlit as st
 import networkx as nx
 import pandas as pd
+import random
 
 from utils.load_data import load_network_data
 from utils.figure_builder import build_graph
+
+random.seed(7)
 
 st.set_page_config(
     page_title="Overview - Contagion in the Gallery",

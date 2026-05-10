@@ -1,4 +1,6 @@
 import streamlit as st
+from utils.figure_builder import build_graph_with_target, build_graph
+from Overview import G_dict, node_df_dict, edge_df_dict, degree_df_dict
 
 dates = ["05-03-2009", "05-13-2009", "05-23-2009", "06-04-2009", "06-14-2009", "06-24-2009", "07-05-2009", "07-15-2009"]
 
@@ -32,11 +34,20 @@ st.divider()
 st.header(body="Independent Cascade Model", anchor="independent-cascade-model")
 selected_target_icm = st.selectbox(
     "Select seed node preference",
-    ["highest betweenness", "highest degree", "highest degree prioritizing communities"],
+    ["highest betweenness", "highest degree", "highest degree prioritizing communities", "random"],
     key="selected_target_icm"
 )
+if selected_target_icm == "highest betweennness":
+    seed_node_type = "icm_betweenness_frequency"
+elif selected_target_icm == "highest degree":
+    seed_node_type = "icm_degree_frequency"
+else:
+    seed_node_type = "icm_degree_frequency"
+
 st.text("TODO: Add network visualization here")
 n_seed_icm = st.slider("Number of seed nodes", 1, 20, 5, key="slider_n_icm")
+fig_btwn_network = build_graph_with_target(node_df_dict[selected_date], edge_df_dict[selected_date], "icm_degree_frequency")
+st.plotly_chart(fig_btwn_network, width="stretch")
 st.divider()
 
 st.header(body="Linear Threshold Model", anchor="linear-threshold-model")

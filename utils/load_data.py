@@ -1,6 +1,7 @@
 import networkx as nx
 import pandas as pd
 import streamlit as st
+from utils.contagion_helpers import get_independent_cascade_dict
 
 @st.cache_data
 
@@ -14,6 +15,10 @@ def load_network_data(path):
     eigenvector = nx.eigenvector_centrality(G, max_iter=1000)
 
     communities = list(nx.community.greedy_modularity_communities(G))
+    icm_degree_frequency = get_independent_cascade_dict(G, "degree", 200)
+    icm_betweenness_frequency = get_independent_cascade_dict(G, "betweenness", 200)
+    icm_random_frequency = get_independent_cascade_dict(G, "random", 200)
+
     community_map = {}
     for i, community in enumerate(communities):
         for node in community:
@@ -29,6 +34,9 @@ def load_network_data(path):
         "closeness": [closeness[n] for n in G.nodes()],
         "eigenvector": [eigenvector[n] for n in G.nodes()],
         "community": [community_map[n] for n in G.nodes()],
+        "icm_degree_frequency": [float(icm_degree_frequency[n]) if n in icm_degree_frequency.keys() else 0 for n in G.nodes()],
+        "icm_betweenness_frequency": [float(icm_betweenness_frequency[n]) if n in icm_betweenness_frequency.keys() else 0 for n in G.nodes()],
+        "icm_random_frequency": [float(icm_random_frequency[n]) if n in icm_random_frequency.keys() else 0 for n in G.nodes()],
         "x": [positions[n][0] for n in G.nodes()],
         "y": [positions[n][1] for n in G.nodes()]
     })
