@@ -44,10 +44,9 @@ elif selected_target_icm == "highest degree":
 else:
     seed_node_type = "icm_degree_frequency"
 
-st.text("TODO: Add network visualization here")
-n_seed_icm = st.slider("Number of seed nodes", 1, 20, 5, key="slider_n_icm")
 fig_btwn_network = build_graph_with_target(node_df_dict[selected_date], edge_df_dict[selected_date], "icm_degree_frequency")
 st.plotly_chart(fig_btwn_network, width="stretch")
+n_seed_icm = st.slider("Number of seed nodes", 1, 20, 5, key="slider_n_icm")
 st.divider()
 
 st.header(body="Linear Threshold Model", anchor="linear-threshold-model")

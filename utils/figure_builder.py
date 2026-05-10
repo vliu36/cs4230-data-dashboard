@@ -89,11 +89,19 @@ def build_graph_with_target(plot_nodes: pd.DataFrame, plot_edges: pd.DataFrame, 
         hoverinfo="none",
         line=dict(width=0.5, color="gray")
     )
+
+    dataColumns = ["node", "community", "degree", "betweenness"]
     
     if metric == "betweenness":
         scaleText = "Betweenness Centrality"
     elif metric == "degree":
         scaleText = "Degree"
+    elif metric == "icm_degree_frequency":
+        scaleText = "Times Activated"
+        dataColumns.append("icm_degree_frequency")
+    elif metric == "icm_betweenness_frequency":
+        scaleText = "Times Activated"
+        dataColumns.append("icm_betweenness_frequency")
     else:
         scaleText = "community"
     
@@ -101,7 +109,7 @@ def build_graph_with_target(plot_nodes: pd.DataFrame, plot_edges: pd.DataFrame, 
     metric_min = metric_values.min()
     metric_max = metric_values.max()
 
-    if metric == "community":
+    if metric != "betweenness" or metric != "degree":
         metric_min = 1
         metric_max = 1
 
@@ -115,12 +123,13 @@ def build_graph_with_target(plot_nodes: pd.DataFrame, plot_edges: pd.DataFrame, 
         y=plot_nodes["y"],
         mode="markers+text",
         textposition="top center",
-        customdata=plot_nodes[["node", "community", "degree", "betweenness"]].values,
+        customdata=plot_nodes[dataColumns].values,
         hovertemplate=(
             "Node: %{customdata[0]}<br>"
             "Community: %{customdata[1]}<br>"
             "Degree: %{customdata[2]}<br>"
             "Betweenness: %{customdata[3]:.3f}<br>"
+            "Times Activated: %{customdata[4]}<br>"
         ),
         marker=dict(
             size=scaled_sizes,
