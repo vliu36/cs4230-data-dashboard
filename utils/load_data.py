@@ -1,7 +1,7 @@
 import networkx as nx
 import pandas as pd
 import streamlit as st
-from utils.contagion_helpers import get_independent_cascade_dict
+from utils.contagion_helpers import get_independent_cascade_dict, get_linear_threshold_dict
 
 @st.cache_data
 
@@ -15,10 +15,14 @@ def load_network_data(path):
     eigenvector = nx.eigenvector_centrality(G, max_iter=1000)
 
     communities = list(nx.community.greedy_modularity_communities(G))
-    icm_degree_frequency = get_independent_cascade_dict(G, "degree", 200)
-    icm_betweenness_frequency = get_independent_cascade_dict(G, "betweenness", 200)
-    icm_degree_spread_out_frequency = get_independent_cascade_dict(G, "degree spread", 200)
-    icm_random_frequency = get_independent_cascade_dict(G, "random", 200)
+    icm_degree_data = get_independent_cascade_dict(G, "degree", 200)
+    icm_betweenness_data = get_independent_cascade_dict(G, "betweenness", 200)
+    icm_degree_spread_out_data = get_independent_cascade_dict(G, "degree spread", 200)
+    icm_random_data = get_independent_cascade_dict(G, "random", 200)
+    ltm_degree_data = get_linear_threshold_dict(G, "degree", 15)
+    ltm_betweenness_data = get_linear_threshold_dict(G, "betweenness", 15)
+    ltm_degree_spread_out_data = get_linear_threshold_dict(G, "degree spread", 15)
+    ltm_random_data = get_linear_threshold_dict(G, "random", 15)
 
     community_map = {}
     for i, community in enumerate(communities):
@@ -35,10 +39,14 @@ def load_network_data(path):
         "closeness": [closeness[n] for n in G.nodes()],
         "eigenvector": [eigenvector[n] for n in G.nodes()],
         "community": [community_map[n] for n in G.nodes()],
-        "icm_degree_frequency": [icm_degree_frequency[0][n] if n in icm_degree_frequency[0].keys() else 0 for n in G.nodes()],
-        "icm_betweenness_frequency": [icm_betweenness_frequency[0][n] if n in icm_betweenness_frequency[0].keys() else 0 for n in G.nodes()],
-        "icm_degree_spread_out_frequency": [icm_degree_spread_out_frequency[0][n] if n in icm_degree_spread_out_frequency[0].keys() else 0 for n in G.nodes()],
-        "icm_random_frequency": [icm_random_frequency[0][n] if n in icm_random_frequency[0].keys() else 0 for n in G.nodes()],
+        "icm_degree_frequency": [icm_degree_data[0][n] if n in icm_degree_data[0].keys() else 0 for n in G.nodes()],
+        "icm_betweenness_frequency": [icm_betweenness_data[0][n] if n in icm_betweenness_data[0].keys() else 0 for n in G.nodes()],
+        "icm_degree_spread_out_frequency": [icm_degree_spread_out_data[0][n] if n in icm_degree_spread_out_data[0].keys() else 0 for n in G.nodes()],
+        "icm_random_frequency": [icm_random_data[0][n] if n in icm_random_data[0].keys() else 0 for n in G.nodes()],
+        "ltm_degree_spread": [ltm_degree_data[0][n] if n in ltm_degree_data[0].keys() else 0 for n in G.nodes()],
+        "ltm_betweeenness_spread": [ltm_betweenness_data[0][n] if n in ltm_betweenness_data[0].keys() else 0 for n in G.nodes()],
+        "ltm_degree_spread_out_spread": [ltm_degree_spread_out_data[0][n] if n in ltm_degree_spread_out_data[0].keys() else 0 for n in G.nodes()],
+        "ltm_random_spread": [ltm_random_data[0][n] if n in ltm_random_data[0].keys() else 0 for n in G.nodes()],
         "x": [positions[n][0] for n in G.nodes()],
         "y": [positions[n][1] for n in G.nodes()]
     })
@@ -49,13 +57,12 @@ def load_network_data(path):
         "degree": [d for _, d in G.degree()]
     })
 
-    icm_degree_spread_info = (icm_degree_frequency[1], icm_degree_frequency[2])
-    icm_betweenness_spread_info = (icm_betweenness_frequency[1], icm_betweenness_frequency[2])
-    icm_degree_spread_out_spread_info = (icm_degree_spread_out_frequency[1], icm_degree_spread_out_frequency[2])
-    icm_random_spread_info = (icm_random_frequency[1], icm_random_frequency[2])
-
+    icm_degree_spread_info = (icm_degree_data[1], icm_degree_data[2])
+    icm_betweenness_spread_info = (icm_betweenness_data[1], icm_betweenness_data[2])
+    icm_degree_spread_out_spread_info = (icm_degree_spread_out_data[1], icm_degree_spread_out_data[2])
+    icm_random_spread_info = (icm_random_data[1], icm_random_data[2])
     
-    return G, node_df, edge_df, degrees, icm_degree_spread_info, icm_betweenness_spread_info, icm_degree_spread_out_spread_info, icm_random_spread_info
+    return G, node_df, edge_df, degrees, icm_degree_spread_info, icm_betweenness_spread_info, icm_degree_spread_out_spread_info, icm_random_spread_info, ltm_degree_data[1], ltm_betweenness_data[1], ltm_degree_spread_out_data[1], ltm_random_data[1]
 
 def giant_component_subgraph(G):
     """Return the subgraph of the largest connected component (undirected)."""

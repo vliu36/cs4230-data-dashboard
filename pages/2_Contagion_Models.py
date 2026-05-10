@@ -1,6 +1,6 @@
 import streamlit as st
 from utils.figure_builder import build_graph_with_target, build_deg_dist
-from Overview import G_dict, node_df_dict, edge_df_dict, dates, icm_degree_spread_info_dict, icm_betweenness_spread_info_dict, icm_degree_spread_out_spread_info_dict, icm_random_spread_info_dict
+from Overview import G_dict, node_df_dict, edge_df_dict, dates, icm_degree_spread_info_dict, icm_betweenness_spread_info_dict, icm_degree_spread_out_spread_info_dict, icm_random_spread_info_dict, ltm_degree_spread_info_dict, ltm_betweenness_spread_info_dict, ltm_degree_spread_out_spread_info_dict, ltm_random_spread_info_dict
 
 st.set_page_config(
     page_title="Contagion Models - Contagion in the Gallery",
@@ -42,35 +42,61 @@ selected_target_icm = st.selectbox(
     key="selected_target_icm"
 )
 
-seed_node_type = "icm_betweenness_frequency"
-activation_stats = icm_betweenness_spread_info_dict[selected_date]
-if selected_target_icm == "highest betweennness":
-    seed_node_type = "icm_betweenness_frequency"
-    activation_stats = icm_betweenness_spread_info_dict[selected_date]
-elif selected_target_icm == "highest degree":
-    seed_node_type = "icm_degree_frequency"
-    activation_stats = icm_degree_spread_info_dict[selected_date]
-elif selected_target_icm == "highest degree prioritizing communities":
-    seed_node_type = "icm_degree_spread_out_frequency"
-    activation_stats = icm_degree_spread_out_spread_info_dict[selected_date]
-elif selected_target_icm == "random":
-    seed_node_type = "icm_random_frequency"
-    activation_stats = icm_random_spread_info_dict[selected_date]
 
-fig_btwn_network = build_graph_with_target(node_df_dict[selected_date], edge_df_dict[selected_date], seed_node_type)
-fig_deg_dist = build_deg_dist(activation_stats[0])
-st.plotly_chart(fig_btwn_network, width="stretch")
+
+icm_seed_node_type = "icm_betweenness_frequency"
+icm_activation_stats = icm_betweenness_spread_info_dict[selected_date]
+if selected_target_icm == "highest betweennness":
+    icm_seed_node_type = "icm_betweenness_frequency"
+    icm_activation_stats = icm_betweenness_spread_info_dict[selected_date]
+elif selected_target_icm == "highest degree":
+    icm_seed_node_type = "icm_degree_frequency"
+    icm_activation_stats = icm_degree_spread_info_dict[selected_date]
+elif selected_target_icm == "highest degree prioritizing communities":
+    icm_seed_node_type = "icm_degree_spread_out_frequency"
+    icm_activation_stats = icm_degree_spread_out_spread_info_dict[selected_date]
+elif selected_target_icm == "random":
+    icm_seed_node_type = "icm_random_frequency"
+    icm_activation_stats = icm_random_spread_info_dict[selected_date]
+
+fig_network = build_graph_with_target(node_df_dict[selected_date], edge_df_dict[selected_date], icm_seed_node_type)
+fig_deg_dist = build_deg_dist(icm_activation_stats[0])
+st.plotly_chart(fig_network, width="stretch")
 st.plotly_chart(fig_deg_dist, width="stretch")
 
 n_seed_icm = st.slider("Number of seed nodes", 1, 20, 5, key="slider_n_icm")
 st.divider()
 
 st.header(body="Linear Threshold Model", anchor="linear-threshold-model")
+col5, col6, col7, col8 = st.columns(4)
+col5.metric("Degree Spread", ltm_degree_spread_info_dict[selected_date], border=True)
+col6.metric("Betweenness Spread", ltm_betweenness_spread_info_dict[selected_date], border=True)
+col7.metric("Degree Spread Out Spread", ltm_degree_spread_out_spread_info_dict[selected_date], border=True)
+col8.metric("Random Spread", ltm_random_spread_info_dict[selected_date], border=True)
+
 selected_target_ltm = st.selectbox(
     "Select seed node preference",
-    ["highest betweenness", "highest degree", "highest degree prioritizing communities"],
+    ["highest betweenness", "highest degree", "highest degree prioritizing communities", "random"],
     key="selected_target_ltm"
 )
+
+ltm_seed_node_type = "ltm_betweenness_spread"
+ltm_activation_spread = ltm_betweenness_spread_info_dict[selected_date]
+if selected_target_ltm == "highest betweennness":
+    ltm_seed_node_type = "ltm_betweenness_spread"
+    ltm_activation_spread = ltm_betweenness_spread_info_dict[selected_date]
+elif selected_target_ltm == "highest degree":
+    ltm_seed_node_type = "ltm_degree_spread"
+    ltm_activation_spread = ltm_degree_spread_info_dict[selected_date]
+elif selected_target_ltm == "highest degree prioritizing communities":
+    ltm_seed_node_type = "ltm_degree_spread_out_spread"
+    ltm_activation_spread = ltm_degree_spread_out_spread_info_dict[selected_date]
+elif selected_target_ltm == "random":
+    ltm_seed_node_type = "ltm_random_spread"
+    ltm_activation_spread = ltm_random_spread_info_dict[selected_date]
+
+fig_network = build_graph_with_target(node_df_dict[selected_date], edge_df_dict[selected_date], ltm_seed_node_type)
+st.plotly_chart(fig_network, width="stretch")
 n_seed_ltm = st.slider("Number of seed nodes", 1, 20, 5, key="slider_n_ltm")
 
 # st.markdown(
