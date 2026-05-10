@@ -42,8 +42,6 @@ selected_target_icm = st.selectbox(
     key="selected_target_icm"
 )
 
-
-
 icm_seed_node_type = "icm_betweenness_frequency"
 icm_activation_stats = icm_betweenness_spread_info_dict[selected_date]
 if selected_target_icm == "highest betweennness":
@@ -60,11 +58,12 @@ elif selected_target_icm == "random":
     icm_activation_stats = icm_random_spread_info_dict[selected_date]
 
 fig_network = build_graph_with_target(node_df_dict[selected_date], edge_df_dict[selected_date], icm_seed_node_type)
-fig_deg_dist = build_deg_dist(icm_activation_stats[0])
+fig_spread_dist = build_deg_dist(icm_activation_stats[0])
 st.plotly_chart(fig_network, width="stretch")
-st.plotly_chart(fig_deg_dist, width="stretch")
+st.caption("Network visualization showing the frequency that nodes got activated throughout the 200 iterations")
+st.plotly_chart(fig_spread_dist, width="stretch")
+st.caption("Histogram showing the distribution of spread throughout the 200 iterations.")
 
-n_seed_icm = st.slider("Number of seed nodes", 1, 20, 5, key="slider_n_icm")
 st.divider()
 
 st.header(body="Linear Threshold Model", anchor="linear-threshold-model")
@@ -97,7 +96,7 @@ elif selected_target_ltm == "random":
 
 fig_network = build_graph_with_target(node_df_dict[selected_date], edge_df_dict[selected_date], ltm_seed_node_type)
 st.plotly_chart(fig_network, width="stretch")
-n_seed_ltm = st.slider("Number of seed nodes", 1, 20, 5, key="slider_n_ltm")
+st.caption("Network visualization showing the nodes that activated.")
 
 # st.markdown(
 # """

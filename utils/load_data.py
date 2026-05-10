@@ -44,7 +44,7 @@ def load_network_data(path):
         "icm_degree_spread_out_frequency": [icm_degree_spread_out_data[0][n] if n in icm_degree_spread_out_data[0].keys() else 0 for n in G.nodes()],
         "icm_random_frequency": [icm_random_data[0][n] if n in icm_random_data[0].keys() else 0 for n in G.nodes()],
         "ltm_degree_spread": [ltm_degree_data[0][n] if n in ltm_degree_data[0].keys() else 0 for n in G.nodes()],
-        "ltm_betweeenness_spread": [ltm_betweenness_data[0][n] if n in ltm_betweenness_data[0].keys() else 0 for n in G.nodes()],
+        "ltm_betweenness_spread": [ltm_betweenness_data[0][n] if n in ltm_betweenness_data[0].keys() else 0 for n in G.nodes()],
         "ltm_degree_spread_out_spread": [ltm_degree_spread_out_data[0][n] if n in ltm_degree_spread_out_data[0].keys() else 0 for n in G.nodes()],
         "ltm_random_spread": [ltm_random_data[0][n] if n in ltm_random_data[0].keys() else 0 for n in G.nodes()],
         "x": [positions[n][0] for n in G.nodes()],
