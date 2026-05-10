@@ -19,7 +19,6 @@ def get_greatest_weight(G):
 def get_highest_degree_nodes(G, num_of_seeds):
     highest_degree_list = []
 
-    # For each network, stores the top 5 highest degree nodes into the dictionary
     degrees = [(degree[0], degree[1] / (len(list(G.nodes())) - 1)) for degree in G.degree()]
     degrees = sorted(degrees, key=lambda x: x[1], reverse=True)
     for i in range(num_of_seeds):
@@ -30,7 +29,6 @@ def get_highest_degree_nodes(G, num_of_seeds):
 def get_highest_betweenness_nodes(G, num_of_seeds):
     btwn_cent_list = []
 
-    # For each network, stores the top 5 highest betweenness nodes into the dictionary
     btwn_cent = nx.betweenness_centrality(G, normalized=True).items()
     btwn_cent = sorted(btwn_cent, key=lambda x: x[1], reverse=True)
     for i in range(num_of_seeds):

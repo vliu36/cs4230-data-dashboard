@@ -1,6 +1,6 @@
 import streamlit as st
 from utils.figure_builder import build_graph_with_target, build_deg_dist
-from Overview import G_dict, node_df_dict, edge_df_dict, dates, icm_degree_spread_info_dict, icm_betweenness_spread_info_dict, icm_degree_spread_out_spread_info_dict, icm_random_spread_info_dict, ltm_degree_spread_info_dict, ltm_betweenness_spread_info_dict, ltm_degree_spread_out_spread_info_dict, ltm_random_spread_info_dict
+from Overview import node_df_dict, edge_df_dict, dates, icm_degree_spread_info_dict, icm_betweenness_spread_info_dict, icm_degree_spread_out_spread_info_dict, icm_random_spread_info_dict, ltm_degree_spread_info_dict, ltm_betweenness_spread_info_dict, ltm_degree_spread_out_spread_info_dict, ltm_random_spread_info_dict
 
 st.set_page_config(
     page_title="Contagion Models - Contagion in the Gallery",
@@ -31,11 +31,12 @@ selected_date = st.selectbox(
 st.divider()
 
 st.header(body="Independent Cascade Model", anchor="independent-cascade-model")
-col1, col2, col3, col4 = st.columns(4)
-col1.metric("Degree Average", icm_degree_spread_info_dict[selected_date][1], border=True)
-col2.metric("Betweenness Average", icm_betweenness_spread_info_dict[selected_date][1], border=True)
-col3.metric("Degree Spread Out Average", icm_degree_spread_out_spread_info_dict[selected_date][1], border=True)
-col4.metric("Random Average", icm_random_spread_info_dict[selected_date][1], border=True)
+col1, col2 = st.columns(2)
+col3, col4 = st.columns(2)
+col1.metric("Highest Degree Seed Nodes Spread Average", icm_degree_spread_info_dict[selected_date][1], border=True)
+col2.metric("Highest Betweenness Seed Nodes Spread Average", icm_betweenness_spread_info_dict[selected_date][1], border=True)
+col3.metric("Highest Degree Seed Nodes Across Communities Spread Average", icm_degree_spread_out_spread_info_dict[selected_date][1], border=True)
+col4.metric("Random Seed Nodes Spread Average", icm_random_spread_info_dict[selected_date][1], border=True)
 selected_target_icm = st.selectbox(
     "Select seed node preference",
     ["highest betweenness", "highest degree", "highest degree prioritizing communities", "random"],
@@ -67,11 +68,13 @@ st.caption("Histogram showing the distribution of spread throughout the 200 iter
 st.divider()
 
 st.header(body="Linear Threshold Model", anchor="linear-threshold-model")
-col5, col6, col7, col8 = st.columns(4)
-col5.metric("Degree Spread", ltm_degree_spread_info_dict[selected_date], border=True)
-col6.metric("Betweenness Spread", ltm_betweenness_spread_info_dict[selected_date], border=True)
-col7.metric("Degree Spread Out Spread", ltm_degree_spread_out_spread_info_dict[selected_date], border=True)
-col8.metric("Random Spread", ltm_random_spread_info_dict[selected_date], border=True)
+col5, col6 = st.columns(2)
+col7, col8 = st.columns(2)
+
+col5.metric("Highest Degree Seed Nodes Spread", ltm_degree_spread_info_dict[selected_date], border=True)
+col6.metric("Highest Betweenness Seed Nodes Spread", ltm_betweenness_spread_info_dict[selected_date], border=True)
+col7.metric("Highest Degree Seed Nodes Across Communities Spread", ltm_degree_spread_out_spread_info_dict[selected_date], border=True)
+col8.metric("Random Seed Nodes Spread", ltm_random_spread_info_dict[selected_date], border=True)
 
 selected_target_ltm = st.selectbox(
     "Select seed node preference",

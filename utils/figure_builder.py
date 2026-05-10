@@ -96,12 +96,12 @@ def build_graph_with_target(plot_nodes: pd.DataFrame, plot_edges: pd.DataFrame, 
         scaleText = "Betweenness Centrality"
     elif metric == "degree":
         scaleText = "Degree"
-    elif metric == "icm_degree_frequency":
+    elif (metric == "icm_betweenness_frequency" or metric == "icm_degree_spread_out_frequency" or 
+    metric == "icm_random_frequency" or metric == "icm_degree_frequency" or 
+    metric == "ltm_betweenness_spread" or metric == "ltm_degree_spread_out_spread" or 
+    metric == "ltm_random_spread" or metric == "ltm_degree_spread"):
         scaleText = "Times Activated"
-        dataColumns.append("icm_degree_frequency")
-    elif metric == "icm_betweenness_frequency":
-        scaleText = "Times Activated"
-        dataColumns.append("icm_betweenness_frequency")
+        dataColumns.append(metric)
     else:
         scaleText = "community"
     
