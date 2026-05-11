@@ -31,12 +31,16 @@ selected_date = st.selectbox(
 st.divider()
 
 st.header(body="Independent Cascade Model", anchor="independent-cascade-model")
+st.markdown("""
+            The activation metrics displayed below also includes the seed nodes. So the number represents the number of seed nodes
+            plus the number of nodes that were activated. Each network has 50 seed nodes.
+            """)
 col1, col2 = st.columns(2)
 col3, col4 = st.columns(2)
-col1.metric("Highest Degree Seed Nodes Spread Average", icm_degree_spread_info_dict[selected_date][1], border=True)
-col2.metric("Highest Betweenness Seed Nodes Spread Average", icm_betweenness_spread_info_dict[selected_date][1], border=True)
-col3.metric("Highest Degree Seed Nodes Across Communities Spread Average", icm_degree_spread_out_spread_info_dict[selected_date][1], border=True)
-col4.metric("Random Seed Nodes Spread Average", icm_random_spread_info_dict[selected_date][1], border=True)
+col1.metric("Highest Degree Seed Nodes Activated Average", icm_degree_spread_info_dict[selected_date][1], border=True)
+col2.metric("Highest Betweenness Seed Nodes Activated Average", icm_betweenness_spread_info_dict[selected_date][1], border=True)
+col3.metric("Highest Degree Seed Nodes Across Communities Activated Average", icm_degree_spread_out_spread_info_dict[selected_date][1], border=True)
+col4.metric("Random Seed Nodes Activated Average", icm_random_spread_info_dict[selected_date][1], border=True)
 selected_target_icm = st.selectbox(
     "Select seed node preference",
     ["highest betweenness", "highest degree", "highest degree prioritizing communities", "random"],
@@ -61,20 +65,25 @@ elif selected_target_icm == "random":
 fig_network = build_graph_with_target(node_df_dict[selected_date], edge_df_dict[selected_date], icm_seed_node_type)
 fig_spread_dist = build_deg_dist(icm_activation_stats[0])
 st.plotly_chart(fig_network, width="stretch")
-st.caption("Network visualization showing the frequency that nodes got activated throughout the 200 iterations")
+st.caption("Network visualization showing the frequency that nodes got activated throughout the 200 iterations. This network also colors the seed nodes so they're frequency are 200 by default.")
 st.plotly_chart(fig_spread_dist, width="stretch")
-st.caption("Histogram showing the distribution of spread throughout the 200 iterations.")
+st.caption("Histogram showing the distribution of spread throughout the 200 iterations. This histogram includes the seed nodes as part of the distribution as well.")
 
 st.divider()
 
 st.header(body="Linear Threshold Model", anchor="linear-threshold-model")
+st.markdown("""
+            The activation metrics displayed below also includes the seed nodes. So the number represents the number of seed nodes
+            plus the number of nodes that were activated. Each network has 50 seed nodes. The set threshold for all nodes of every
+            network is 15.
+            """)
 col5, col6 = st.columns(2)
 col7, col8 = st.columns(2)
 
-col5.metric("Highest Degree Seed Nodes Spread", ltm_degree_spread_info_dict[selected_date], border=True)
-col6.metric("Highest Betweenness Seed Nodes Spread", ltm_betweenness_spread_info_dict[selected_date], border=True)
-col7.metric("Highest Degree Seed Nodes Across Communities Spread", ltm_degree_spread_out_spread_info_dict[selected_date], border=True)
-col8.metric("Random Seed Nodes Spread", ltm_random_spread_info_dict[selected_date], border=True)
+col5.metric("Highest Degree Seed Nodes Activated", ltm_degree_spread_info_dict[selected_date], border=True)
+col6.metric("Highest Betweenness Seed Nodes Activated", ltm_betweenness_spread_info_dict[selected_date], border=True)
+col7.metric("Highest Degree Seed Nodes Across Communities Activated", ltm_degree_spread_out_spread_info_dict[selected_date], border=True)
+col8.metric("Random Seed Nodes Activated", ltm_random_spread_info_dict[selected_date], border=True)
 
 selected_target_ltm = st.selectbox(
     "Select seed node preference",
@@ -99,7 +108,7 @@ elif selected_target_ltm == "random":
 
 fig_network = build_graph_with_target(node_df_dict[selected_date], edge_df_dict[selected_date], ltm_seed_node_type)
 st.plotly_chart(fig_network, width="stretch")
-st.caption("Network visualization showing the nodes that activated.")
+st.caption("Network visualization showing the nodes that activated. This network also colors the seed nodes so they are activated by default.")
 
 # st.markdown(
 # """
