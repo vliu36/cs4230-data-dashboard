@@ -53,6 +53,10 @@ st.header(
 )
 st.markdown(
     """
+    This dataset is obtained from SocioPatterns's "Infectious" exhibition. The exhibition was part of an experiment conducted over the
+    course of a couple of months at the Science Gallery at Dublin, where visitors had the opportunity to wear sensors that detected
+    face-to-face proximity with another person. The resulting data formed a network that could be used for network analysis.
+    The dataset was provided in graph modeling language (GML), which was then converted into a NetworkX graph representation. 
     """
 )
 st.divider()
