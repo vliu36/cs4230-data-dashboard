@@ -62,14 +62,10 @@ st.markdown(
     travel from exhibit to exhibit, and can explain how high betweenness centrality nodes could also be hubs in this scenario.
 
     #### What can be changed to reduce the spread of activation?
-    Based on the results for the independent cascade model, the best way to reduce the spread of activation is to 
-    isolate nodes with high betweenness centrality. In the case of disease spread, it would be to isolate infected 
-    individuals who have high betweenness centrality. Additionally, it could even be to isolate individuals who are 
-    undetermined to be infected but also have a high betweenness centrality in the event of rapid spread. 
-
-    Based on the results of the independent cascade model, the best way to reduce the spread of activation is to 
-    also address high betweenness centrality nodes. So for instance, if a rumor is spreading in a highly populated 
-    area, it would be best to address the fallacy of a rumor to people who have high centrality before the rumor reaches them.
+    To reduce the spread of activation, since the networks display behavior of some individuals moving from group
+    to group potentially, acting as nodes with high betwenness centrality, activation can be reduce by somehow grouping
+    people. For instance, this can be done by having a policy to explicitly group people and only letting one group
+    at a time into an exhibit.
 
     """
 )
