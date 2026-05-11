@@ -26,7 +26,10 @@ Out of data recorded across multiple months, we picked out 8 networks in total, 
 Since we were provided with over 60 datasets, selecting every 10th day allow us to perform analysis across all datasets 
 without dealing with an overwhelming amount of data. 
 
-Each day tells its own story:
+For each dataset, we examined the characteristics of the network and compared them to characteristics of a real-world network.
+Although these datasets are meant to simulate real-world interactions, most of them differ slightly to characteristics in real-world
+networks, such as a heavy-tailed degree distribution and high clustering coefficient. We additionally identified high betweenness centrality,
+high degree centrality, and community nodes for use in contagion modeling.
 """
 )
 
@@ -40,6 +43,13 @@ with tab1:
     fig_deg_dist = build_deg_dist(degree_df_dict[date])
     st.plotly_chart(fig_deg_dist, width="stretch")
     st.caption("Degree distribution of the selected network.")
+    st.markdown("""
+                The degree distribution for this network is slightly skewed right and the clustering coefficient is 
+                on the lower end. However, the average path length is short like that of a real-world network.
+
+                These characteristics show that the structure of this network slightly differs to that of a real-world
+                network.
+                """)
     st.divider()
 
     st.header(body="Degree Centrality", anchor="degree-centrality")
@@ -68,6 +78,13 @@ with tab2:
     fig_deg_dist = build_deg_dist(degree_df_dict[date])
     st.plotly_chart(fig_deg_dist, width="stretch")
     st.caption("Degree distribution of the selected network.")
+    st.markdown("""
+                The degree distribution for this network is rather heavy-tailed and the clustering coefficient is 
+                moderate. The average path length is also short like that of a real-world network.
+
+                These characteristics show that the structure of this network is similar to that of a real-world
+                network.
+                """)
     st.divider()
 
     st.header(body="Degree Centrality", anchor="degree-centrality")
@@ -95,6 +112,13 @@ with tab3:
     fig_deg_dist = build_deg_dist(degree_df_dict[date])
     st.plotly_chart(fig_deg_dist, width="stretch")
     st.caption("Degree distribution of the selected network.")
+    st.markdown("""
+                The degree distribution for this network is slightly skewed right and the clustering coefficient is 
+                on the lower end. However, the average path length is short like that of a real-world network.
+
+                These characteristics show that the structure of this network slightly differs to that of a real-world
+                network.
+                """)
     st.divider()
 
     st.header(body="Degree Centrality", anchor="degree-centrality")
@@ -122,6 +146,13 @@ with tab4:
     fig_deg_dist = build_deg_dist(degree_df_dict[date])
     st.plotly_chart(fig_deg_dist, width="stretch")
     st.caption("Degree distribution of the selected network.")
+    st.markdown("""
+                The degree distribution for this network is heavy-tailed and the clustering coefficient is 
+                moderate. The average path length is also short like that of a real-world network.
+
+                These characteristics show that the structure of this network is similar to that of a real-world
+                network.
+                """)
     st.divider()
 
     st.header(body="Degree Centrality", anchor="degree-centrality")
@@ -149,6 +180,13 @@ with tab5:
     fig_deg_dist = build_deg_dist(degree_df_dict[date])
     st.plotly_chart(fig_deg_dist, width="stretch")
     st.caption("Degree distribution of the selected network.")
+    st.markdown("""
+                The degree distribution for this network is slightly skewed right and the clustering coefficient is 
+                on the lower end. However, the average path length is short like that of a real-world network.
+
+                These characteristics show that the structure of this network slightly differs to that of a real-world
+                network.
+                """)
     st.divider()
 
     st.header(body="Degree Centrality", anchor="degree-centrality")
@@ -176,6 +214,13 @@ with tab6:
     fig_deg_dist = build_deg_dist(degree_df_dict[date])
     st.plotly_chart(fig_deg_dist, width="stretch")
     st.caption("Degree distribution of the selected network.")
+    st.markdown("""
+                The degree distribution for this network is slightly skewed right and the clustering coefficient is 
+                on the lower end. However, the average path length is short like that of a real-world network.
+
+                These characteristics show that the structure of this network slightly differs to that of a real-world
+                network.
+                """)
     st.divider()
 
     st.header(body="Degree Centrality", anchor="degree-centrality")
@@ -203,6 +248,12 @@ with tab7:
     fig_deg_dist = build_deg_dist(degree_df_dict[date])
     st.plotly_chart(fig_deg_dist, width="stretch")
     st.caption("Degree distribution of the selected network.")
+    st.markdown("""
+                The degree distribution for this network is closer to that of a normal distribution. However, the average path length is short like that of a real-world network.
+
+                These characteristics show that the structure of this network slightly differs to that of a real-world
+                network.
+                """)
     st.divider()
 
     st.header(body="Degree Centrality", anchor="degree-centrality")
@@ -230,6 +281,13 @@ with tab8:
     fig_deg_dist = build_deg_dist(degree_df_dict[date])
     st.plotly_chart(fig_deg_dist, width="stretch")
     st.caption("Degree distribution of the selected network.")
+    st.markdown("""
+                The degree distribution for this network is slightly skewed right and the clustering coefficient is 
+                on the lower end. However, the average path length is short like that of a real-world network.
+
+                These characteristics show that the structure of this network slightly differs to that of a real-world
+                network.
+                """)
     st.divider()
 
     st.header(body="Degree Centrality", anchor="degree-centrality")
@@ -249,12 +307,3 @@ with tab8:
     st.plotly_chart(fig_btwn_network, width="stretch")
     st.caption("Network visualization showing its communities, according to the greedy modularity algorithm")
     
-# st.markdown(
-# """
-# This section will include:
-# - structural analysis of each network aiming to answer the first research question
-# - degree distribution figures for each network
-# - comparisons of each network to characteristics of a real-world network
-# - visualization of high betweenness centrality and high degree nodes (may be moved to contagion section)
-# """
-# )
